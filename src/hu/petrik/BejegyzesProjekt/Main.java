@@ -88,5 +88,29 @@ public class Main {
             }
         }
         System.out.println("A legnépszerübb bejegyzés: " + lista.get(hely));
+        hely = -1;
+        for (int x = 0; x < lista.size(); x++) {
+            if (lista.get(x).getLikeok() > 35) {
+                hely = x;
+            }
+
+        }
+        if (hely == -1) {
+            System.out.println("Nem volt olyan bejegyzés ami több mint 35 like-ot kapott volna.");
+        }
+        else {
+            System.out.println("Ennek a bejegyzésnek több mint 35 like-ja volt: " +
+                    lista.get(hely));
+        }
+
+        int segedc = 0;
+        for (int x = 0; x < lista.size(); x++) {
+            if (lista.get(x).getLikeok() < 15) {
+                segedc++;
+            }
+        }
+        System.out.println(segedc + " olyan bejegyzés volt, aminek kevesebb mint 15 like-ja lett.");
+
+
     }
 }
