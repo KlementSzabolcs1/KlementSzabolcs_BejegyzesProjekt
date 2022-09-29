@@ -66,11 +66,27 @@ public class Main {
         }
 
         Random rnd = new Random();
-        long seged = lista.stream().count()*20;
+        int seged = lista.size() * 20;
         for (int b = 0; b < seged; b++) {
-            bejegyzes.like();
+            lista.get(rnd.nextInt(lista.size())).like();
         }
 
+        System.out.println("Gépelj be egy szöveget!");
+        String bekert = sc.nextLine();
+        lista.get(1).setTartalom(bekert);
 
+
+        for (int x = 0; x < lista.size(); x++) {
+            System.out.println(lista.get(x));
+        }
+
+        int hely = 0;
+        for (int x = 1; x < lista.size(); x++) {
+
+            if (lista.get(x).getLikeok() > lista.get(hely).getLikeok()) {
+                hely = x;
+            }
+        }
+        System.out.println("A legnépszerübb bejegyzés: " + lista.get(hely));
     }
 }
