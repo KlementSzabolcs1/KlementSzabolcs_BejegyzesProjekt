@@ -1,7 +1,11 @@
 package hu.petrik.BejegyzesProjekt;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -17,9 +21,15 @@ public class Main {
 
         Scanner sc = new Scanner(System.in);
         System.out.println("Hány bejegyzést szeretnél felvenni?");
-        int beker = Integer.parseInt(sc.nextLine());
+        int beker = 0;
+        try {
+            beker = Integer.parseInt(sc.nextLine());
+        }
+        catch (NumberFormatException e) {
+            System.err.println("Nem pozitív egész számot adott meg!");
+        }
         int i = 0;
-        while(beker-1 > i) {
+        while(beker > i) {
             try {
                 System.out.print("Adja meg a bejegyzés szerzőjét: ");
                 String bekert = sc.nextLine();
@@ -30,10 +40,35 @@ public class Main {
 
             }
             catch (NumberFormatException e) {
-                System.err.println("Nem pozitív egész számot adott meg");
+
             }
 
             i++;
+        }
+
+        File fajl = new File("bejegyzesek.csv");
+        Scanner fajlbeolvas = new Scanner("");
+        try {
+            fajl = new File("bejegyzesek.csv");
+            fajlbeolvas = new Scanner(fajl);
+
+        }
+        catch (FileNotFoundException e) {
+
+        }
+
+        while(fajlbeolvas.hasNext()) {
+            String[] beolvas = fajlbeolvas.nextLine().split(";");
+            bejegyzes = new Bejegyzes(beolvas[0],beolvas[1]);
+            lista.add(bejegyzes);
+
+
+        }
+
+        Random rnd = new Random();
+        long seged = lista.stream().count()*20;
+        for (int b = 0; b < seged; b++) {
+            bejegyzes.like();
         }
 
 
